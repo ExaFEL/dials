@@ -808,7 +808,13 @@ class LevenbergMarquardtIterations(GaussNewtonIterations):
     pass
 
   def _run_core(self):
-
+    base_solve = self.solve
+    def time_solve():
+      from libtbx.development.timers import Profiler
+      start = Profiler("solve")
+      base_solve()
+    self.solve = time_solve
+    
     # add an attribute to the journal
     self.history.add_column("mu")
     self.history.add_column("nu")

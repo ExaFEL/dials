@@ -197,6 +197,8 @@ class Script(object):
     return
 
   def run(self):
+    from libtbx.development.timers import Profiler
+    PX = Profiler("refinery")
     '''Execute the script.'''
     from time import time
     import cPickle as pickle
